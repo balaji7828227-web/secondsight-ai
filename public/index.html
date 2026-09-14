@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SecondSight AI — Stress-Test Variation & PRISM Evolution Engine</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <div>
+          <h1>SecondSight AI <span class="header-badge">with PRISM</span></h1>
+          <p class="tagline">Realistic stress-test variation generator & self-evolving robustness engine</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <div class="badge-status">
+          <span class="status-dot"></span>
+          <span>Gemini Engine Ready</span>
+        </div>
+        <div class="badge-prism">
+          <span class="prism-dot"></span>
+          <span>PRISM Evaluator Active</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Input Card -->
+      <section class="card input-card">
+        <div class="card-header">
+          <h2>Seed Input</h2>
+          <span class="card-subtext">Enter a core message to simulate how different personas express it</span>
+        </div>
+
+        <!-- Quick Preset Buttons for Demo -->
+        <div class="presets-bar">
+          <span class="preset-label">Quick Demo Presets:</span>
+          <button type="button" class="preset-btn" data-preset="I have sudden sharp chest pain radiating to my left arm that started 20 minutes ago">
+            🩺 Medical
+          </button>
+          <button type="button" class="preset-btn" data-preset="Payment gateway latency spiked to 4500ms and users are experiencing repeated failed checkouts">
+            🚨 Dev / Incident
+          </button>
+          <button type="button" class="preset-btn" data-preset="My package arrived damaged yesterday and nobody has replied to my support ticket">
+            📦 Customer Support
+          </button>
+        </div>
+
+        <form id="generate-form">
+          <div class="textarea-wrapper">
+            <textarea 
+              id="seed-input" 
+              name="seedInput" 
+              rows="4" 
+              placeholder="Type your seed input here... (e.g. 'I have sudden sharp chest pain radiating to my left arm that started 20 minutes ago')"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" id="clear-btn" class="btn btn-secondary">Clear</button>
+            <button type="submit" id="generate-btn" class="btn btn-primary">
+              <span class="btn-text">⚡ Generate Variations</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </form>
+
+        <!-- Error Notification Banner -->
+        <div id="error-banner" class="error-banner hidden" role="alert">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <span id="error-message"></span>
+        </div>
+      </section>
+
+      <!-- Variations Results Section -->
+      <section id="results-section" class="results-section hidden">
+        <div class="section-title-bar">
+          <div>
+            <h2>5 Stress-Test Variations</h2>
+            <p class="results-subtext">Generated from seed input: <em id="display-seed"></em></p>
+          </div>
+          <div class="title-actions">
+            <button type="button" id="copy-all-btn" class="btn btn-sm btn-secondary">
+              📋 Copy All
+            </button>
+          </div>
+        </div>
+
+        <div id="variations-grid" class="variations-grid">
+          <!-- Cards injected dynamically via script.js -->
+        </div>
+
+        <!-- PRISM Action Trigger Bar -->
+        <div class="prism-actions-card">
+          <div class="prism-actions-info">
+            <div class="prism-icon-pill">🔬 PRISM Layer</div>
+            <div>
+              <h3>Evaluate & Evolve SecondSight AI</h3>
+              <p>Evaluate SecondSight AI's own generator outputs across stress-test categories, diagnose weaknesses, and evolve generator robustness.</p>
+            </div>
+          </div>
+          <div class="prism-action-buttons">
+            <button type="button" id="evaluate-prism-btn" class="btn btn-prism">
+              <span class="btn-text">🔬 Evaluate with PRISM</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <button type="button" id="evolve-prism-btn" class="btn btn-evolve">
+              <span class="btn-text">🚀 Run Evolution (Before vs After)</span>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRISM Evaluation Results Section -->
+      <section id="prism-evaluation-section" class="prism-section hidden">
+        <div class="prism-header-bar">
+          <div class="prism-badge-title">
+            <span class="prism-chip">PRISM Audit</span>
+            <h2>SecondSight AI Robustness Scorecard</h2>
+          </div>
+          <span id="prism-overall-badge" class="score-badge">85 / 100</span>
+        </div>
+
+        <!-- Top Scorecard Grid -->
+        <div class="scorecard-grid">
+          <div class="metric-card score-hero">
+            <span class="metric-label">Overall PRISM Score</span>
+            <div class="score-display">
+              <span id="eval-overall-score" class="big-score">--</span>
+              <span class="max-score">/ 100</span>
+            </div>
+            <span id="eval-status-label" class="status-pill">Evaluating...</span>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Semantic Preservation</span>
+            <div class="metric-progress-wrapper">
+              <div class="progress-bar-bg">
+                <div id="dim-semantic-bar" class="progress-bar-fill fill-blue" style="width: 0%"></div>
+              </div>
+              <span id="dim-semantic-val" class="metric-val">--%</span>
+            </div>
+            <p class="metric-desc">Fidelity to core situation & factual anchors without hallucination</p>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Category Distinctiveness</span>
+            <div class="metric-progress-wrapper">
+              <div class="progress-bar-bg">
+                <div id="dim-distinct-bar" class="progress-bar-fill fill-purple" style="width: 0%"></div>
+              </div>
+              <span id="dim-distinct-val" class="metric-val">--%</span>
+            </div>
+            <p class="metric-desc">Authenticity across Clear, Minimizing, Informal, Incomplete, Conflicting</p>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-label">Stress Efficacy</span>
+            <div class="metric-progress-wrapper">
+              <div class="progress-bar-bg">
+                <div id="dim-stress-bar" class="progress-bar-fill fill-amber" style="width: 0%"></div>
+              </div>
+              <span id="dim-stress-val" class="metric-val">--%</span>
+            </div>
+            <p class="metric-desc">Plausibility of human communication noise challenging downstream systems</p>
+          </div>
+        </div>
+
+        <!-- Category Breakdown -->
+        <div class="subcard">
+          <h3>Category Performance Breakdown</h3>
+          <div id="category-scores-container" class="category-scores-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Diagnosed Weaknesses -->
+        <div class="subcard">
+          <div class="subcard-header">
+            <h3>Diagnosed Weaknesses & Failure Patterns</h3>
+            <span id="weakness-count-badge" class="badge-count">0 Detected</span>
+          </div>
+          <p class="subcard-subtext">PRISM identified the following generator limitations in the baseline output:</p>
+          <div id="weaknesses-list" class="weaknesses-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Recommended Improvements -->
+        <div class="subcard">
+          <h3>PRISM Generator Evolution Directives</h3>
+          <ul id="recommendations-list" class="recommendations-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </section>
+
+      <!-- PRISM Before vs After Evolution Section -->
+      <section id="prism-evolution-section" class="prism-section hidden">
+        <div class="prism-header-bar">
+          <div class="prism-badge-title">
+            <span class="prism-chip chip-evolve">Evolution Cycle</span>
+            <h2>SecondSight AI: Before vs After PRISM Evolution</h2>
+          </div>
+          <div id="evolution-delta-badge" class="delta-badge">+0 pts</div>
+        </div>
+
+        <!-- Comparative Scoreboard -->
+        <div class="evolution-scoreboard">
+          <div class="scoreboard-col before-col">
+            <span class="scoreboard-header">Baseline Generator ("Before")</span>
+            <div class="scoreboard-score">
+              <span id="evolve-before-score" class="score-num">--</span>
+              <span class="score-den">/ 100</span>
+            </div>
+            <span id="evolve-before-status" class="substatus-pill">Baseline</span>
+          </div>
+
+          <div class="scoreboard-delta-col">
+            <div class="delta-arrow">➔</div>
+            <span id="evolve-delta-text" class="delta-label">-- pts improvement</span>
+          </div>
+
+          <div class="scoreboard-col after-col">
+            <span class="scoreboard-header">PRISM Evolved Generator ("After")</span>
+            <div class="scoreboard-score">
+              <span id="evolve-after-score" class="score-num score-green">--</span>
+              <span class="score-den">/ 100</span>
+            </div>
+            <span id="evolve-after-status" class="substatus-pill pill-green">Evolved</span>
+          </div>
+        </div>
+
+        <!-- Resolved Weaknesses Checklist -->
+        <div class="subcard">
+          <h3>Resolved Weaknesses</h3>
+          <div id="resolved-weaknesses-list" class="resolved-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Side by Side Variations Comparison -->
+        <div class="subcard">
+          <h3>Variations Comparison: Baseline vs Evolved</h3>
+          <div id="side-by-side-container" class="side-by-side-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>SecondSight AI + PRISM — Evaluates and evolves stress-test variations for NLP and conversational agent robustness.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
